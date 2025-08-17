@@ -1,44 +1,59 @@
 module alu(
-    input [7:0] A,
-    input [7:0] B,
+    input [15:0] A,
+    input [15:0] B,
     input Ext_cin,
-    input [3:0] ALUop,
-    output reg [7:0] y,
+    input [4:0] ALUop,
+    output reg [15:0] y,
     output z, // Zero flag
     output n, // Negative flag
     output reg c, // Carry flag
     output reg v, // Signed overflow flag
-    output bor
 );
     // CLA
-    localparam ADD = 4'b0000; // Add
-    localparam ADC = 4'b0001; // Add-Carry
-    localparam SUB = 4'b0010; // Subtract
-    localparam SBC = 4'b0011; // Subtract-Carry
+    localparam ADD = 5'b00000; // Add
+    localparam ADC = 5'b00001; // Add-carry
+    localparam SUB = 5'b00010; // Subtract
+    localparam SBC = 5'b00011; // Subtract-carry
+    localparam AND = 5'b00100; 
+    localparam OR = 5'b00101;
+    localparam XOR = 5'b00110;
+    localparam NOT = 5'b00111;
 
-    localparam AND = 4'b0100; // AND
-    localparam OR = 4'b0101; // OR
-    localparam XOR = 4'b0110; // XOR
-    localparam NOT = 4'b0111; // NOT
-    localparam LSR = 4'b1000; // Logical shift right
-    localparam LSL = 4'b1001; // Logical shift left
-    localparam ASR = 4'b1010; // Arithmatic shift right
-    //localparam ASL = 4'b1011; // Arithmatic shift left
-    localparam ROR = 4'b1100; // Roll right
-    localparam ROL = 4'b1101; // Roll left
-    localparam PSA = 4'b1110; // Pass A
-    localparam PSB = 4'b1111; // Pass B
+    localparam LSL = 5'b01000; // Logical shift left
+    localparam LSR = 5'b01001; // Logical shift right
+    localparam ASR = 5'b01010; // Arithmetic shift right
+    localparam ROL = 5'b01011; // Roll left
+    localparam ROR = 5'b01100; // Roll right
+
+    // MOV = 5'b01101; // Move
+    // LD = 5'b01110; // Load
+    // ST = 5'b01111; // Store
+    // JMP = 5'b10000; // Jump
+    // JZ = 5'b10001; // Jump if zero
+    // JC = 5'b10010;
+    // ...
+
+    /*
+    [15:12] Opcode
+    [11:8]  Dest Reg
+    [7:4]   Src Reg
+    [3:0]   Unused / flags
+    */
+
+
+
+
 
     wire add_operation = (ALUop==ADD) | (ALUop==ADC);
     wire sub_operation = (ALUop==SUB) | (ALUop==SBC);
 
-    wire [7:0] B_eff = sub_operation ? ~B : B;
+    wire [15:0] B_eff = sub_operation ? ~B : B;
     wire Cin_eff = (ALUop==ADD) ? 1'b0 :
                     (ALUop==ADC) ? Ext_cin :
                     (ALUop==SUB) ? 1'b1 :
                     (ALUop==SBC) ? Ext_cin : 1'b0;
 
-    wire [7:0] add_sum;
+    wire [15:0] add_sum;
     wire add_cout;
     wire add_ovf;
 
@@ -52,7 +67,7 @@ module alu(
     );
 
     always @* begin
-        y = 8'h00;
+        y = 16'h0000;
         c = 1'b0;
         v = 1'b0;
 
@@ -91,10 +106,6 @@ module alu(
                 y = {A[7], A[7:1]};
                 c = A[0];
             end
-            /*ASL: begin
-                y = {A[6:0], 1'b0};
-                c = A[7];
-            end*/
             ROR: begin
                 y = {Ext_cin, A[7:1]};
                 c = A[0];
@@ -103,14 +114,11 @@ module alu(
                 y = {A[6:0], Ext_cin};
                 c = A[7];
             end
-            PSA: y = A;
-            PSB: y = B;
             default: begin
-                y = 8'h00;
+                y = 16'h0000;
             end
         endcase
     end
-    assign bor = sub_operation ? ~add_cout : 1'b0;
-    assign z = (y == 8'h00);
-    assign n = y[7];
+    assign z = (y == 16'h0000);
+    assign n = y[15];
 endmodule

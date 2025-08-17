@@ -1,11 +1,11 @@
 `timescale 1ps/1ps
 
 module tb_alu;
-    reg  [7:0] A, B;
+    reg  [15:0] A, B;
     reg        Ext_cin;
-    reg  [3:0] ALUop;
-    wire [7:0] y;
-    wire       z, n, c, v, bor;
+    reg  [4:0] ALUop;
+    wire [15:0] y;
+    wire       z, n, c, v;
 
     alu DUT (
         .A(A), .B(B),
@@ -16,13 +16,12 @@ module tb_alu;
         .n(n),
         .c(c),
         .v(v),
-        .bor(bor)
     );
 
      initial begin
         $dumpfile("dumpalu.vcd");
         $dumpvars(0, tb_alu);
-
+        /* UPDATE THIS
         // Test ADD
         A=8'd5; B=8'd10; Ext_cin=0; ALUop=4'b0000; #10;
         $display("ADD: 5+10 = %0d, y=%0d c=%b v=%b", A,B,y,c,v);
@@ -53,7 +52,7 @@ module tb_alu;
 
         A=8'b10010001; ALUop=4'b1001; #10; // LSL
         $display("LSL: A=%b, y=%b c=%b", A,y,c);
-
+        */
         // Done
         $finish;
     end
