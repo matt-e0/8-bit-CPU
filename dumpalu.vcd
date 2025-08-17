@@ -1,5 +1,5 @@
 $date
-	Sun Aug 17 19:57:30 2025
+	Sun Aug 17 20:26:02 2025
 $end
 $version
 	Icarus Verilog
@@ -34,114 +34,110 @@ $var wire 1 4 ovf_hi $end
 $var wire 1 $ n $end
 $var wire 1 5 c_out_lo $end
 $var wire 1 6 c_out_hi $end
-$var wire 8 7 b_B_eff [15:8] $end
-$var wire 16 8 add_sum [15:0] $end
-$var wire 8 9 a_B_eff [7:0] $end
-$var wire 1 : Cin_eff $end
-$var parameter 5 ; ADC $end
-$var parameter 5 < ADD $end
-$var parameter 5 = AND $end
-$var parameter 5 > ASR $end
-$var parameter 5 ? LSL $end
-$var parameter 5 @ LSR $end
-$var parameter 5 A NOT $end
-$var parameter 5 B OR $end
-$var parameter 5 C ROL $end
-$var parameter 5 D ROR $end
-$var parameter 5 E SBC $end
-$var parameter 5 F SUB $end
-$var parameter 5 G XOR $end
+$var wire 16 7 add_sum [15:0] $end
+$var wire 1 8 Cin_eff $end
+$var parameter 5 9 ADC $end
+$var parameter 5 : ADD $end
+$var parameter 5 ; AND $end
+$var parameter 5 < ASR $end
+$var parameter 5 = LSL $end
+$var parameter 5 > LSR $end
+$var parameter 5 ? NOT $end
+$var parameter 5 @ OR $end
+$var parameter 5 A ROL $end
+$var parameter 5 B ROR $end
+$var parameter 5 C SBC $end
+$var parameter 5 D SUB $end
+$var parameter 5 E XOR $end
 $var reg 1 % c $end
 $var reg 1 # v $end
-$var reg 16 H y [15:0] $end
+$var reg 16 F y [15:0] $end
 $scope module a_adder $end
-$var wire 8 I a [7:0] $end
-$var wire 8 J b [7:0] $end
-$var wire 1 K c1 $end
-$var wire 1 L c2 $end
-$var wire 1 M c3 $end
-$var wire 1 N c4 $end
-$var wire 1 O c5 $end
-$var wire 1 P c6 $end
-$var wire 1 Q c7 $end
-$var wire 1 R c8 $end
-$var wire 1 : cin $end
+$var wire 8 G a [7:0] $end
+$var wire 8 H b [7:0] $end
+$var wire 1 I c1 $end
+$var wire 1 J c2 $end
+$var wire 1 K c3 $end
+$var wire 1 L c4 $end
+$var wire 1 M c5 $end
+$var wire 1 N c6 $end
+$var wire 1 O c7 $end
+$var wire 1 P c8 $end
+$var wire 1 8 cin $end
 $var wire 1 5 cout $end
-$var wire 8 S g [7:0] $end
+$var wire 8 Q g [7:0] $end
 $var wire 1 3 ovf $end
-$var wire 8 T p [7:0] $end
-$var wire 8 U s [7:0] $end
+$var wire 8 R p [7:0] $end
+$var wire 8 S s [7:0] $end
 $upscope $end
 $scope module b_adder $end
-$var wire 8 V a [7:0] $end
-$var wire 8 W b [7:0] $end
-$var wire 1 X c1 $end
-$var wire 1 Y c2 $end
-$var wire 1 Z c3 $end
-$var wire 1 [ c4 $end
-$var wire 1 \ c5 $end
-$var wire 1 ] c6 $end
-$var wire 1 ^ c7 $end
-$var wire 1 _ c8 $end
+$var wire 8 T a [7:0] $end
+$var wire 8 U b [7:0] $end
+$var wire 1 V c1 $end
+$var wire 1 W c2 $end
+$var wire 1 X c3 $end
+$var wire 1 Y c4 $end
+$var wire 1 Z c5 $end
+$var wire 1 [ c6 $end
+$var wire 1 \ c7 $end
+$var wire 1 ] c8 $end
 $var wire 1 5 cin $end
 $var wire 1 6 cout $end
-$var wire 8 ` g [7:0] $end
+$var wire 8 ^ g [7:0] $end
 $var wire 1 4 ovf $end
-$var wire 8 a p [7:0] $end
-$var wire 8 b s [7:0] $end
+$var wire 8 _ p [7:0] $end
+$var wire 8 ` s [7:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
 $dumpall
-b110 G
-b10 F
-b11 E
-b1100 D
-b1011 C
-b101 B
-b111 A
-b1001 @
-b1000 ?
-b1010 >
-b100 =
-b0 <
-b1 ;
+b110 E
+b10 D
+b11 C
+b1100 B
+b1011 A
+b101 @
+b111 ?
+b1001 >
+b1000 =
+b1010 <
+b100 ;
+b0 :
+b1 9
 $end
 #0
 $dumpvars
-b0 b
-b0 a
 b0 `
-0_
-0^
+b0 _
+b0 ^
 0]
 0\
 0[
 0Z
 0Y
 0X
-b0 W
-b0 V
-b1111 U
-b1111 T
-b0 S
-0R
-0Q
+0W
+0V
+b0 U
+b0 T
+b1111 S
+b1111 R
+b0 Q
 0P
 0O
 0N
 0M
 0L
 0K
-b1010 J
-b101 I
-b1111 H
-0:
-b1010 9
-b1111 8
-b1010 7
+0J
+0I
+b1010 H
+b101 G
+b1111 F
+08
+b1111 7
 06
 05
 04
@@ -166,47 +162,85 @@ b1111 "
 0!
 $end
 #10
-1K
-1M
+1%
+1V
+1W
+1X
+1Y
+1Z
+1[
+1\
+1-
+16
+1]
+15
+1P
+1O
 1N
+1M
+0$
+1I
+1K
 1L
-b11110101 9
-b11110101 7
-1:
-b11010 8
-b11010 1
-b11010 U
-b101 T
-b1010 S
+1J
+b0 2
+b0 `
+b11111111 _
+18
+b101 7
+b101 1
+b101 S
+b11110101 H
+b11111111 U
+b11111010 R
+b101 Q
 0.
 10
 0!
-b11010 "
-b11010 H
-b1111 I
+b101 "
+b101 F
+b1111 G
 b10 '
 b10 +
 b1111 &
 b1111 *
 #20
 0M
-0N
-0K
 0L
-0:
-b1111 9
-b1111 7
-b11111111 8
+0N
+0O
+05
+0P
+0W
+0X
+0Y
+0Z
+0[
+0\
+0-
+06
+0]
+0V
+0J
+0K
+b0 2
+b0 `
+0I
+b0 _
+08
+b11111111 7
 b11111111 1
-b11111111 U
-b11111111 T
-b0 S
+b11111111 S
+b0 U
+b1111 H
+b11111111 R
+b0 Q
 00
-b1111 J
+0%
 1!
 b0 "
-b0 H
-b11110000 I
+b0 F
+b11110000 G
 b100 '
 b100 +
 b1111 (
@@ -216,17 +250,30 @@ b11110000 *
 #30
 0!
 b11111111 "
-b11111111 H
+b11111111 F
 b101 '
 b101 +
 #40
-b1010101 9
-b1010101 7
-b1010101 J
+b0 2
+b0 `
+0K
+0L
+0M
+0N
+0O
+05
+0P
+0J
+b11111111 7
+b11111111 1
+b11111111 S
+b1010101 H
+b11111111 R
+b0 Q
 0!
 b11111111 "
-b11111111 H
-b10101010 I
+b11111111 F
+b10101010 G
 b110 '
 b110 +
 b1010101 (
@@ -235,64 +282,59 @@ b10101010 &
 b10101010 *
 #50
 b0 2
-b0 b
+b0 `
+1J
+1K
 1L
 1M
-1N
-1O
-0P
-0Q
+0N
+0O
 05
-0R
-1K
-b1100100 8
+0P
+1I
+b1100100 7
 b1100100 1
-b1100100 U
+b1100100 S
 1$
-b1011010 T
-b101 S
+b1011010 R
+b101 Q
 0!
 b1111111111110000 "
-b1111111111110000 H
-b1111 I
+b1111111111110000 F
+b1111 G
 b111 '
 b111 +
 b1111 &
 b1111 *
 #60
 b1 2
-b1 b
+b1 `
 15
-1R
-03
 1P
-1Q
-b101010100 8
+03
+1N
+1O
+b101010100 7
 b1010100 1
-b1010100 U
+b1010100 S
 0$
-b10101010 T
-b1010101 S
-1%
+b10101010 R
+b1010101 Q
 0!
-b11111110 "
-b11111110 H
-b11111111 I
+b111111110 "
+b111111110 F
+b11111111 G
 b1000 '
 b1000 +
 b11111111 &
 b11111111 *
 #70
 05
-0R
+0P
 0-
 06
-0_
-03
-0^
-0P
-0Q
 0]
+03
 0\
 0N
 0O
@@ -302,21 +344,24 @@ b11111111 *
 0M
 0Y
 0X
+0J
 0K
+0W
+0V
+0I
 b1010101 1
-b1010101 U
-b1111111101010101 8
+b1010101 S
+b1111111101010101 7
 b11111111 2
-b11111111 b
-b1010101 T
-b0 S
-b11111111 a
-0%
-1!
-b0 "
-b0 H
-b0 I
-b11111111 V
+b11111111 `
+b1010101 R
+b0 Q
+b11111111 _
+0!
+b111111110000000 "
+b111111110000000 F
+b0 G
+b11111111 T
 b1001 '
 b1001 +
 b1111111100000000 &

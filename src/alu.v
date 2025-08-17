@@ -40,15 +40,9 @@ module alu(
     [3:0]   Unused / flags
     */
 
-
-
-
-
     wire add_operation = (ALUop==ADD) | (ALUop==ADC);
     wire sub_operation = (ALUop==SUB) | (ALUop==SBC);
 
-    wire [7:0] a_B_eff = sub_operation ? ~B : B;
-    wire [15:8] b_B_eff = sub_operation ? ~B : B;
     wire Cin_eff = (ALUop==ADD) ? 1'b0 :
                     (ALUop==ADC) ? Ext_cin :
                     (ALUop==SUB) ? 1'b1 :
@@ -57,23 +51,23 @@ module alu(
     wire [15:0] add_sum;
     wire add_cout;
     wire add_ovf;
-    // FIX !!!!!!!!!!!!!!!!!!!
+   
     wire [7:0] sum_lo, sum_hi;
     wire c_out_lo, c_out_hi;
     wire ovf_lo, ovf_hi;
 
     CLA a_adder (
         .a   (A[7:0]),
-        .b   (B[7:0]),
+        .b   (B[7:0] ^ {8{sub_operation}}), // bitwise invert if 
         .cin (Cin_eff),
         .s   (sum_lo),
         .cout(c_out_lo),
-        .ovf (ovf_lo)  // you may ignore this, overflow matters only at MSB stage
+        .ovf (ovf_lo)  // internal
     );
 
     CLA b_adder (
         .a   (A[15:8]),
-        .b   (B[15:8]),
+        .b   (B[15:8] ^ {8{sub_operation}}),
         .cin (c_out_lo),   // chain carry
         .s   (sum_hi),
         .cout(c_out_hi),
@@ -118,24 +112,24 @@ module alu(
                 y = ~A;
             end
             LSR: begin
-                y = {1'b0, A[7:1]};
+                y = {1'b0, A[15:1]};
                 c = A[0];
             end
             LSL: begin
-                y = {A[6:0], 1'b0};
-                c = A[7];
+                y = {A[14:0], 1'b0};
+                c = A[15];
             end
             ASR: begin
-                y = {A[7], A[7:1]};
+                y = {A[15], A[15:1]};
                 c = A[0];
             end
             ROR: begin
-                y = {Ext_cin, A[7:1]};
+                y = {Ext_cin, A[15:1]};
                 c = A[0];
             end
             ROL: begin
-                y = {A[6:0], Ext_cin};
-                c = A[7];
+                y = {A[14:0], Ext_cin};
+                c = A[15];
             end
             default: begin
                 y = 16'h0000;
