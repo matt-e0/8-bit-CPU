@@ -5,7 +5,8 @@ all:
 view:
 	gtkwave dump.vcd
 clean:
-	rm -f cpu_sim dump.vcd
+	rm -f cpu_sim, dump.vcd
+	rm -f alu_sim, dumpalu.vcd
 alu:
 	iverilog -o alu_sim tb/tb_alu.v src/*.v
 	vvp alu_sim

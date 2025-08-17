@@ -7,7 +7,7 @@ module alu(
     output z, // Zero flag
     output n, // Negative flag
     output reg c, // Carry flag
-    output reg v, // Signed overflow flag
+    output reg v // Signed overflow flag
 );
     // CLA
     localparam ADD = 5'b00000; // Add
@@ -47,7 +47,8 @@ module alu(
     wire add_operation = (ALUop==ADD) | (ALUop==ADC);
     wire sub_operation = (ALUop==SUB) | (ALUop==SBC);
 
-    wire [15:0] B_eff = sub_operation ? ~B : B;
+    wire [7:0] a_B_eff = sub_operation ? ~B : B;
+    wire [15:8] b_B_eff = sub_operation ? ~B : B;
     wire Cin_eff = (ALUop==ADD) ? 1'b0 :
                     (ALUop==ADC) ? Ext_cin :
                     (ALUop==SUB) ? 1'b1 :
@@ -56,15 +57,37 @@ module alu(
     wire [15:0] add_sum;
     wire add_cout;
     wire add_ovf;
+    // FIX !!!!!!!!!!!!!!!!!!!
+    wire [7:0] sum_lo, sum_hi;
+    wire c_out_lo, c_out_hi;
+    wire ovf_lo, ovf_hi;
 
-    CLA u_adder (
-        .a(A),
-        .b(B_eff),
-        .cin(Cin_eff),
-        .s(add_sum),
-        .cout(add_cout),
-        .ovf(add_ovf)
+    CLA a_adder (
+        .a   (A[7:0]),
+        .b   (B[7:0]),
+        .cin (Cin_eff),
+        .s   (sum_lo),
+        .cout(c_out_lo),
+        .ovf (ovf_lo)  // you may ignore this, overflow matters only at MSB stage
     );
+
+    CLA b_adder (
+        .a   (A[15:8]),
+        .b   (B[15:8]),
+        .cin (c_out_lo),   // chain carry
+        .s   (sum_hi),
+        .cout(c_out_hi),
+        .ovf (ovf_hi)
+    );
+
+    // Combine outputs
+    assign add_sum  = {sum_hi, sum_lo};
+    assign add_cout = c_out_hi;
+
+    // For signed overflow: use MSB stage
+    assign add_ovf  = ovf_hi;
+
+
 
     always @* begin
         y = 16'h0000;

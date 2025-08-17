@@ -15,44 +15,44 @@ module tb_alu;
         .z(z),
         .n(n),
         .c(c),
-        .v(v),
+        .v(v)
     );
 
      initial begin
         $dumpfile("dumpalu.vcd");
         $dumpvars(0, tb_alu);
-        /* UPDATE THIS
+
         // Test ADD
-        A=8'd5; B=8'd10; Ext_cin=0; ALUop=4'b0000; #10;
-        $display("ADD: 5+10 = %0d, y=%0d c=%b v=%b", A,B,y,c,v);
+        A=16'd5; B=16'd10; Ext_cin=0; ALUop=5'b00000; #10;
+        //$display("ADD: 5+10 = %0d, y=%0d c=%b v=%b", A,B,y,c,v);
 
         // Test SUB
-        A=8'd15; B=8'd10; Ext_cin=0; ALUop=4'b0010; #10;
-        $display("SUB: 15-10 = %0d, y=%0d c=%b v=%b", A,B,y,c,v);
+        A=16'd15; B=16'd10; Ext_cin=0; ALUop=5'b00010; #10;
+        //$display("SUB: 15-10 = %0d, y=%0d c=%b v=%b", A,B,y,c,v);
 
         // Test AND
-        A=8'hF0; B=8'h0F; ALUop=4'b0100; #10;
-        $display("AND: F0 & 0F = %h, y=%h", A,B,y);
+        A=16'h00F0; B=16'h000F; ALUop=5'b00100; #10;
+        //$display("AND: F0 & 0F = %h, y=%h", A,B,y);
 
         // Test OR
-        A=8'hF0; B=8'h0F; ALUop=4'b0101; #10;
-        $display("OR:  F0 | 0F = %h, y=%h", A,B,y);
+        A=16'h00F0; B=16'h000F; ALUop=5'b00101; #10;
+        //$display("OR:  F0 | 0F = %h, y=%h", A,B,y);
 
         // Test XOR
-        A=8'hAA; B=8'h55; ALUop=4'b0110; #10;
-        $display("XOR: AA ^ 55 = %h, y=%h", A,B,y);
+        A=16'h00AA; B=16'h0055; ALUop=5'b00110; #10;
+        //$display("XOR: AA ^ 55 = %h, y=%h", A,B,y);
 
         // Test NOT
-        A=8'h0F; ALUop=4'b0111; #10;
-        $display("NOT: ~0F = %h, y=%h", A,y);
+        A=16'h000F; ALUop=5'b00111; #10;
+        //$display("NOT: ~0F = %h, y=%h", A,y);
 
         // Test shift
-        A=8'b10010001; ALUop=4'b1000; #10; // LSR
-        $display("LSR: A=%b, y=%b c=%b", A,y,c);
+        A=16'h00FF; ALUop=5'b01000; #10; // LSL
+        //$display("LSR: A=%b, y=%b c=%b", A,y,c);
 
-        A=8'b10010001; ALUop=4'b1001; #10; // LSL
-        $display("LSL: A=%b, y=%b c=%b", A,y,c);
-        */
+        A=16'hFF00; ALUop=5'b01001; #10; // LSR
+        //$display("LSL: A=%b, y=%b c=%b", A,y,c);
+        
         // Done
         $finish;
     end
